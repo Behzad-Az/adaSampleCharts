@@ -3,14 +3,18 @@ exports.up = function(knex, Promise) {
   return Promise.all([
     knex.schema.createTableIfNotExists('inventoryCount', t => {
       t.bigIncrements('id');
-      t.string('materialMaster', 15).notNullable();
-      // t.string('company_hashtag', 20).notNullable();
-      // t.string('company_id', 20).notNullable();
-      // t.string('work_location_hashtag', 15).notNullable();
-      // t.string('work_enviro', 20).notNullable();
-      // t.string('content', 500).notNullable();
-      // t.integer('like_count').notNullable().defaultTo(0);
-      // t.integer('flag_count').notNullable().defaultTo(0);
+      t.date('postingDate').notNullable();
+      t.string('materialNum', 30).notNullable();
+      t.string('plantNum', 30).notNullable();
+      t.string('storageLocation', 30).notNullable();
+      t.string('movementType', 30).notNullable();
+      t.string('specialStock', 30);
+      t.string('materialDoc', 30).notNullable();
+      t.string('materialDocItem', 30).notNullable();
+      t.string('orderNum', 30);
+      t.integer('qntyOfOrder').notNullable();
+      t.string('unitOfOrder', 30).notNullable();
+      t.string('purchaseOrderNum', 30);
       t.timestamps(true, true);
       t.timestamp('deleted_at');
     })
