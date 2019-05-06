@@ -5,7 +5,7 @@ import {
   GET_PEOPLE_ERROR,
   GET_PEOPLE_SUCCESS,
 } from 'actions/people';
-import api from 'api';
+import api from 'api/index';
 
 // -------- Get people
 

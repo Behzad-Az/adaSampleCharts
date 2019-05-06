@@ -5,6 +5,7 @@ import { routeCodes } from 'constants/routes';
 import Menu from 'components/global/Menu';
 import Home from 'views/Home';
 import People from 'views/People';
+import Charts from 'views/Charts';
 import NotFound from 'views/NotFound';
 
 
@@ -18,6 +19,7 @@ class App extends Component {
           <Switch>
             <Route exact path={ routeCodes.HOME } component={ Home } />
             <Route path={ routeCodes.PEOPLE } component={ People } />
+            <Route path={ routeCodes.CHARTS } component={ Charts } />
             <Route path='*' component={ NotFound } />
           </Switch>
         </div>
