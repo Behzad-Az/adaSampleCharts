@@ -14,6 +14,18 @@ const devServer = {
   disableHostCheck: true, // To enable local network testing
   overlay: true,
   stats,
+  proxy: {
+    '/api': {
+      target: 'http://127.0.0.1:19001',
+      secure: false
+    },
+    // '/api/**': 'http://127.0.0.1:19001',
+    // '/api/': 'http://127.0.0.1:19001',
+    // '/imagesapi/': 'http://127.0.0.1:19001'
+    // '/api/**': 'http://198.199.115.67:19001',
+    // '/api/': 'http://198.199.115.67:19001',
+    // '/imagesapi/': 'http://198.199.115.67:19001'
+  }
 };
 
 module.exports = {

@@ -6,6 +6,7 @@ import CircleSvg from 'svg/circle.svg';
 import SquareSvg from 'svg/square.svg';
 import TriangleSvg from 'svg/triangle.svg';
 import bookImg from 'img/book2.jpg';
+import { Chart } from "react-google-charts";
 
 @connect(state => ({
   counter: state.app.get('counter'),
@@ -49,6 +50,16 @@ export default class Home extends Component {
         </p>
 
         <hr />
+
+        <div className={"my-pretty-chart-container"}>
+          <Chart
+            chartType="ScatterChart"
+            data={[["Age", "Weight"], [4, 5.5], [8, 12]]}
+            width="100%"
+            height="400px"
+            legendToggle
+          />
+        </div>
 
         <h2>Examples</h2>
 
