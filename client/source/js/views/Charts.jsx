@@ -35,18 +35,52 @@ export default class Charts extends Component {
       charts,
     } = this.props;
 
-    console.log("i'm here 1: ", charts);
+    const { allInventoryMoveData, materialNums } = charts;
 
-    return charts.results.map(chart => {
+    // const materialNums = allInventoryMoveData.map()
+    const separatedInventoryMoveData = {};
+
+    materialNums.forEach(num => separatedInventoryMoveData[num] = allInventoryMoveData.filter(entry => entry.materialNum === num));
+
+    console.log("i'm here 0: ", separatedInventoryMoveData);
+
+    return materialNums.map(num => {
       return (
-        <div className='my-pretty-chart-container'>
+        <div className='my-pretty-chart-container' key={num}>
+          { num }
+
+
           <Chart
-            chartType='ScatterChart'
-            data={[['Age', 'Weight'], [4, 5.5], [8, 12]]}
-            width='100%'
-            height='400px'
-            legendToggle
+            width={'600px'}
+            height={'400px'}
+            chartType="LineChart"
+            loader={<div>Loading Chart</div>}
+            data={[
+              ['x', 'dogs', 'cats'],
+              [0, 0, 0],
+              [1, 10, 5],
+              [2, 23, 15],
+              [3, 17, 9],
+              [4, 18, 10],
+              [5, 9, 5],
+              [6, 11, 3],
+              [7, 27, 19],
+            ]}
+            options={{
+              hAxis: {
+                title: 'Time',
+              },
+              vAxis: {
+                title: 'Popularity',
+              },
+              series: {
+                1: { curveType: 'function' },
+              },
+            }}
+            rootProps={{ 'data-testid': '2' }}
           />
+
+
         </div>
       );
     });

@@ -1,13 +1,14 @@
 const getChartsData = (req, res, knex) => {
 
-  console.log("i'm here 0, getChartsData.js");
+  const materialNums = [ '66108593' ];
 
   knex('inventoryCount')
   .sum('qntyOfOrder as qntyMoved')
   .select('postingDate as date', 'materialNum')
+  .whereIn('materialNum', materialNums)
   .groupBy('date', 'materialNum')
   .orderBy('date', 'materialNum')
-  .then(results => res.send({ results }))
+  .then(allInventoryMoveData => res.send({ allInventoryMoveData, materialNums }))
   .catch(err => {
     console.log('Error in getChartsData.js: ', err);
     res.send(false);
