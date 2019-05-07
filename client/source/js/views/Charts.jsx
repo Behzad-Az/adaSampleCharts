@@ -80,7 +80,7 @@ export default class Charts extends Component {
               hAxis: {
                 format: 'MMM-yy',
                 viewWindow: {
-                  min: new Date(2015, 1),
+                  min: new Date(2012, 1),
                   max: new Date(2019, 5)
                 }
               },
