@@ -12,7 +12,7 @@ exports.up = function(knex, Promise) {
       t.string('materialDoc', 30).notNullable();
       t.string('materialDocItem', 30).notNullable();
       t.string('orderNum', 30);
-      t.integer('qntyOfOrder').notNullable();
+      t.decimal('qntyOfOrder').notNullable();
       t.string('unitOfOrder', 30).notNullable();
       t.string('purchaseOrderNum', 30);
       t.timestamps(true, true);

@@ -1,6 +1,6 @@
 const getChartsData = (req, res, knex) => {
 
-  const materialNums = [ '66108593' ];
+  const materialNums = [ '66108593', '11093090' ];
 
   knex('inventoryCount')
   .sum('qntyOfOrder as qntyMoved')

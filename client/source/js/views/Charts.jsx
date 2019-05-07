@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getCharts } from 'actions/charts';
 import { Chart } from "react-google-charts";
+import { defaultChartData } from 'constants/defaultChartData';
 
 @connect(state => ({
   error: state.charts.get('error'),
@@ -36,51 +37,67 @@ export default class Charts extends Component {
     } = this.props;
 
     const { allInventoryMoveData, materialNums } = charts;
-
-    // const materialNums = allInventoryMoveData.map()
     const separatedInventoryMoveData = {};
 
-    materialNums.forEach(num => separatedInventoryMoveData[num] = allInventoryMoveData.filter(entry => entry.materialNum === num));
-
-    console.log("i'm here 0: ", separatedInventoryMoveData);
+    materialNums.forEach(num => {
+      const filteredData = allInventoryMoveData.filter(entry => entry.materialNum === num);
+      separatedInventoryMoveData[num] = {};
+      filteredData.forEach(dataPoint => {
+        separatedInventoryMoveData[num][`${dataPoint.date}`] = { qntyMoved: dataPoint.qntyMoved };
+      });
+    });
 
     return materialNums.map(num => {
+
+      const chartDataObj = [ ...defaultChartData ];
+      chartDataObj.forEach((dataPoint, index) => {
+        if (index === 0) {
+          dataPoint.qnty = separatedInventoryMoveData[num][`${dataPoint.date}`] ?
+            Number(separatedInventoryMoveData[num][`${dataPoint.date}`].qntyMoved) : 0;
+        } else {
+          dataPoint.qnty = separatedInventoryMoveData[num][`${dataPoint.date}`] ?
+            chartDataObj[index - 1].qnty + Number(separatedInventoryMoveData[num][`${dataPoint.date}`].qntyMoved) :
+            chartDataObj[index - 1].qnty;
+        }
+      });
+
+      const chartDataArr = chartDataObj.map((dataPoint, index) => [
+        new Date(dataPoint.date), dataPoint.qnty
+      ]);
+
       return (
         <div className='my-pretty-chart-container' key={num}>
           { num }
-
-
           <Chart
             width={'600px'}
             height={'400px'}
             chartType="LineChart"
             loader={<div>Loading Chart</div>}
             data={[
-              ['x', 'dogs', 'cats'],
-              [0, 0, 0],
-              [1, 10, 5],
-              [2, 23, 15],
-              [3, 17, 9],
-              [4, 18, 10],
-              [5, 9, 5],
-              [6, 11, 3],
-              [7, 27, 19],
+              ['x', num],
+              ...chartDataArr
             ]}
             options={{
+              legend: 'none',
               hAxis: {
                 title: 'Time',
+                viewWindow: {
+                  min: new Date(2017, 1),
+                  max: new Date(2019, 5)
+                }
               },
               vAxis: {
                 title: 'Popularity',
+                viewWindow: {
+                  min: 0
+                }
               },
               series: {
-                1: { curveType: 'function' },
+                0: { curveType: 'function' },
               },
             }}
             rootProps={{ 'data-testid': '2' }}
           />
-
-
         </div>
       );
     });
