@@ -4,7 +4,7 @@ const dataArr = JSON.parse(dataRaw);
 
 exports.seed = function(knex, Promise) {
   // Deletes ALL existing entries
-  return knex('inventoryCount')
+  return knex('mtrlMovements')
   .del()
-  .then(() => Promise.all([ knex('inventoryCount').insert(dataArr) ]))
+  .then(() => Promise.all([ knex('mtrlMovements').insert(dataArr) ]))
 };

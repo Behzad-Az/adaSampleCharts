@@ -63,7 +63,7 @@ export default class Charts extends Component {
               chartDataArr[index][1];
           }
         }
-        chartDataArr.push([ new Date(dataPoint.date), qnty, 5, 15 ]);
+        chartDataArr.push([ new Date(dataPoint.date), qnty, 1, 2 ]);
       });
 
       return (

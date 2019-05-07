@@ -37,7 +37,16 @@ const getChartsData = require('./helpers/GetRoutes/getChartsData.js');
 // ***************************************************
 // ROUTES - GET
 // ***************************************************
-app.get('/', (req, res) => res.send('Hello Worldq!'))
+// app.get('/', (req, res) => res.send('Hello Worldq!'));
+
+app.get('/', (req, res) => {
+  // knex('mtrlMovements')
+  // .select('mtrlNum')
+  // .groupBy('mtrlNum')
+  // .orderBy('mtrlNum')
+  // .then(res.send);
+  res.send('yo');
+});
 
 app.get('/api/charts', (req, res) => {
   getChartsData(req, res, knex);
