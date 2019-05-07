@@ -36,34 +36,35 @@ export default class Charts extends Component {
       charts,
     } = this.props;
 
-    const { allInventoryMoveData, materialNums } = charts;
-    const separatedInventoryMoveData = {};
+    const { rawMtrlMoveData, mtrlNums } = charts;
+    let indexedMoveData = {};
 
-    materialNums.forEach(num => {
-      const filteredData = allInventoryMoveData.filter(entry => entry.materialNum === num);
-      separatedInventoryMoveData[num] = {};
-      filteredData.forEach(dataPoint => {
-        separatedInventoryMoveData[num][`${dataPoint.date}`] = { qntyMoved: dataPoint.qntyMoved };
-      });
+    rawMtrlMoveData.map(entry => {
+      const { mtrlNum, date, qntyMoved } = entry;
+      if (indexedMoveData[`${mtrlNum}`]){
+        indexedMoveData[`${mtrlNum}`][`${date}`] = { qntyMoved };
+      } else {
+        indexedMoveData[`${mtrlNum}`] = {};
+        indexedMoveData[`${mtrlNum}`][`${date}`] = { qntyMoved };
+      }
     });
 
-    return materialNums.map(num => {
-
-      const chartDataObj = [ ...defaultChartData ];
-      chartDataObj.forEach((dataPoint, index) => {
-        if (index === 0) {
-          dataPoint.qnty = separatedInventoryMoveData[num][`${dataPoint.date}`] ?
-            Number(separatedInventoryMoveData[num][`${dataPoint.date}`].qntyMoved) : 0;
-        } else {
-          dataPoint.qnty = separatedInventoryMoveData[num][`${dataPoint.date}`] ?
-            chartDataObj[index - 1].qnty + Number(separatedInventoryMoveData[num][`${dataPoint.date}`].qntyMoved) :
-            chartDataObj[index - 1].qnty;
+    return mtrlNums.map(num => {
+      let chartDataArr = [['date', 'Qnty', 'min', 'max']];
+      defaultChartData.forEach((dataPoint, index) => {
+        let qnty = 0;
+        if (indexedMoveData[num]) {
+          if (index === 0) {
+            qnty = indexedMoveData[num][`${dataPoint.date}`] ?
+              Number(indexedMoveData[num][`${dataPoint.date}`].qntyMoved) : 0;
+          } else {
+            qnty = indexedMoveData[num][`${dataPoint.date}`] ?
+              chartDataArr[index][1] + Number(indexedMoveData[num][`${dataPoint.date}`].qntyMoved) :
+              chartDataArr[index][1];
+          }
         }
+        chartDataArr.push([ new Date(dataPoint.date), qnty, 5, 15 ]);
       });
-
-      const chartDataArr = chartDataObj.map((dataPoint, index) => [
-        new Date(dataPoint.date), dataPoint.qnty
-      ]);
 
       return (
         <div className='my-pretty-chart-container' key={num}>
@@ -73,21 +74,18 @@ export default class Charts extends Component {
             height={'400px'}
             chartType="LineChart"
             loader={<div>Loading Chart</div>}
-            data={[
-              ['x', num],
-              ...chartDataArr
-            ]}
+            data={chartDataArr}
             options={{
               legend: 'none',
               hAxis: {
-                title: 'Time',
+                format: 'MMM-yy',
                 viewWindow: {
-                  min: new Date(2017, 1),
+                  min: new Date(2015, 1),
                   max: new Date(2019, 5)
                 }
               },
               vAxis: {
-                title: 'Popularity',
+                title: 'Quantity',
                 viewWindow: {
                   min: 0
                 }
