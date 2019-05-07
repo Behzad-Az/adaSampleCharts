@@ -6,10 +6,10 @@ const getChartsData = (req, res, knex) => {
 
   knex('mtrlMovements')
   .sum('qntyMoved as qntyMoved')
-  .select('date', 'mtrlNum')
+  .select('postingDate', 'mtrlNum')
   .whereIn('mtrlNum', mtrlNums)
-  .groupBy('date', 'mtrlNum')
-  .orderBy('date', 'mtrlNum')
+  .groupBy('postingDate', 'mtrlNum')
+  .orderBy('postingDate', 'mtrlNum')
   .then(rawMtrlMoveData => res.send({ rawMtrlMoveData, mtrlNums }))
   .catch(err => {
     console.log('Error in getChartsData.js: ', err);

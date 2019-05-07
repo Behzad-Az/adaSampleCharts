@@ -3,7 +3,7 @@ exports.up = function(knex, Promise) {
   return Promise.all([
     knex.schema.createTableIfNotExists('mtrlMovements', t => {
       t.bigIncrements('id');
-      t.date('date').notNullable();
+      t.date('postingDate').notNullable();
       t.string('mtrlNum', 30).notNullable();
       t.string('plantNum', 30).notNullable();
       t.string('storageLoc', 30).notNullable();

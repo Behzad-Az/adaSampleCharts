@@ -40,30 +40,31 @@ export default class Charts extends Component {
     let indexedMoveData = {};
 
     rawMtrlMoveData.map(entry => {
-      const { mtrlNum, date, qntyMoved } = entry;
+      const { mtrlNum, postingDate, qntyMoved } = entry;
       if (indexedMoveData[`${mtrlNum}`]){
-        indexedMoveData[`${mtrlNum}`][`${date}`] = { qntyMoved };
+        indexedMoveData[`${mtrlNum}`][`${postingDate}`] = { qntyMoved };
       } else {
         indexedMoveData[`${mtrlNum}`] = {};
-        indexedMoveData[`${mtrlNum}`][`${date}`] = { qntyMoved };
+        indexedMoveData[`${mtrlNum}`][`${postingDate}`] = { qntyMoved };
       }
     });
 
     return mtrlNums.map(num => {
       let chartDataArr = [['date', 'Qnty', 'min', 'max']];
       defaultChartData.forEach((dataPoint, index) => {
+        const { postingDate } = dataPoint;
         let qnty = 0;
         if (indexedMoveData[num]) {
           if (index === 0) {
-            qnty = indexedMoveData[num][`${dataPoint.date}`] ?
-              Number(indexedMoveData[num][`${dataPoint.date}`].qntyMoved) : 0;
+            qnty = indexedMoveData[num][`${postingDate}`] ?
+              Number(indexedMoveData[num][`${postingDate}`].qntyMoved) : 0;
           } else {
-            qnty = indexedMoveData[num][`${dataPoint.date}`] ?
-              chartDataArr[index][1] + Number(indexedMoveData[num][`${dataPoint.date}`].qntyMoved) :
+            qnty = indexedMoveData[num][`${postingDate}`] ?
+              chartDataArr[index][1] + Number(indexedMoveData[num][`${postingDate}`].qntyMoved) :
               chartDataArr[index][1];
           }
         }
-        chartDataArr.push([ new Date(dataPoint.date), qnty, 1, 2 ]);
+        chartDataArr.push([ new Date(postingDate), qnty, 1, 2 ]);
       });
 
       return (
