@@ -1,5 +1,5 @@
 const fs = require('fs');
-const dataRaw = fs.readFileSync(__dirname + '/_mtrlMovementSeed.json');
+const dataRaw = fs.readFileSync(__dirname + '/_mtrlMovementSeed01.json');
 const dataArr = JSON.parse(dataRaw);
 
 exports.seed = function(knex, Promise) {

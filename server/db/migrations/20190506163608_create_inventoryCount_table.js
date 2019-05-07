@@ -1,8 +1,30 @@
 
 exports.up = function(knex, Promise) {
   return Promise.all([
+    knex.schema.createTableIfNotExists('mtrlMetaInfo', t => {
+      t.bigIncrements('id');
+      t.string('mtrlNum', 30).notNullable();
+      t.string('header', 200).notNullable();
+      t.string('longText', 1000).notNullable().defaultTo('No long text information available');
+      t.decimal('reorderQnty').notNullable();
+      t.decimal('maxQnty').notNullable();
+      t.decimal('movingPrice').notNullable();
+      t.string('replenishTo', 30).notNullable().defaultTo('Max');
+      t.integer('plannedDelivTime').notNullable();
+      t.string('plannedDelivUoM', 30).notNullable();
+      t.decimal('currentQnty').notNullable();
+      t.string('unitOfMeasure', 30).notNullable();
+      t.string('subArea', 30).notNullable();
+      t.date('lastUpdateDate').notNullable();
+      t.date('chartLowerBound').notNullable();
+      t.string('storageLoc', 30).notNullable();
+      t.timestamps(true, true);
+      t.timestamp('deleted_at');
+    }),
+
     knex.schema.createTableIfNotExists('mtrlMovements', t => {
       t.bigIncrements('id');
+      t.bigInteger('mtrlMetaInfoId').notNullable().references('mtrlMetaInfo.id');
       t.date('postingDate').notNullable();
       t.string('mtrlNum', 30).notNullable();
       t.string('plantNum', 30).notNullable();
@@ -23,6 +45,7 @@ exports.up = function(knex, Promise) {
 
 exports.down = function(knex, Promise) {
   return Promise.all([
-    knex.schema.dropTable('mtrlMovements')
+    knex.schema.dropTable('mtrlMovements'),
+    knex.schema.dropTable('mtrlMetaInfo')
   ]);
 };
