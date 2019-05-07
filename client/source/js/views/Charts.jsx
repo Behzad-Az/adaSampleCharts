@@ -40,14 +40,27 @@ export default class Charts extends Component {
     let indexedMoveData = {};
 
     rawMtrlMoveData.map(entry => {
-      const { mtrlNum, postingDate, qntyMoved, reorderQnty, maxQnty, chartLowerBound } = entry;
+      const {
+        mtrlNum,
+        postingDate,
+        qntyMoved,
+        reorderQnty,
+        maxQnty,
+        chartLowerBound,
+        currentQnty,
+        header,
+        movingPrice
+      } = entry;
       if (indexedMoveData[`${mtrlNum}`]) {
         indexedMoveData[`${mtrlNum}`][`${postingDate}`] = { qntyMoved };
       } else {
         indexedMoveData[`${mtrlNum}`] = {
           reorderQnty,
           maxQnty,
-          chartLowerBound
+          chartLowerBound,
+          currentQnty,
+          header,
+          movingPrice
         };
         indexedMoveData[`${mtrlNum}`][`${postingDate}`] = { qntyMoved };
       }
@@ -57,6 +70,9 @@ export default class Charts extends Component {
       let chartDataArr = [['date', 'Qnty', 'min', 'max']];
       let reorderQnty = 0;
       let maxQnty = 0;
+      let currentQnty = 0;
+      let header = '';
+      let movingPrice = 0;
       let chartLowerBound = new Date(2012, 1);
 
       defaultChartData.forEach((dataPoint, index) => {
@@ -65,6 +81,9 @@ export default class Charts extends Component {
         if (indexedMoveData[num]) {
           reorderQnty = Number(indexedMoveData[num].reorderQnty);
           maxQnty = Number(indexedMoveData[num].maxQnty);
+          currentQnty = Number(indexedMoveData[num].currentQnty);
+          header = indexedMoveData[num].header;
+          movingPrice = Math.round(Number(indexedMoveData[num].movingPrice));
           chartLowerBound = new Date(indexedMoveData[num].chartLowerBound);
           if (index === 0) {
             qnty = indexedMoveData[num][`${postingDate}`] ?
@@ -80,7 +99,7 @@ export default class Charts extends Component {
 
       return (
         <div className='my-pretty-chart-container' key={num}>
-          { num }
+          { `MM ${num}, Current Qnty ${currentQnty}, ${header}, Unit Price $${movingPrice}` }
           <Chart
             width={'600px'}
             height={'400px'}
@@ -93,7 +112,7 @@ export default class Charts extends Component {
                 format: 'MMM-yy',
                 viewWindow: {
                   min: chartLowerBound,
-                  max: new Date(2019, 5)
+                  max: new Date(2019, 5, 2)
                 }
               },
               vAxis: {
