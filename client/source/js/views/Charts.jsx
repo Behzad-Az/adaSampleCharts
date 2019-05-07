@@ -40,21 +40,32 @@ export default class Charts extends Component {
     let indexedMoveData = {};
 
     rawMtrlMoveData.map(entry => {
-      const { mtrlNum, postingDate, qntyMoved } = entry;
-      if (indexedMoveData[`${mtrlNum}`]){
+      const { mtrlNum, postingDate, qntyMoved, reorderQnty, maxQnty, chartLowerBound } = entry;
+      if (indexedMoveData[`${mtrlNum}`]) {
         indexedMoveData[`${mtrlNum}`][`${postingDate}`] = { qntyMoved };
       } else {
-        indexedMoveData[`${mtrlNum}`] = {};
+        indexedMoveData[`${mtrlNum}`] = {
+          reorderQnty,
+          maxQnty,
+          chartLowerBound
+        };
         indexedMoveData[`${mtrlNum}`][`${postingDate}`] = { qntyMoved };
       }
     });
 
     return mtrlNums.map(num => {
       let chartDataArr = [['date', 'Qnty', 'min', 'max']];
+      let reorderQnty = 0;
+      let maxQnty = 0;
+      let chartLowerBound = new Date(2012, 1);
+
       defaultChartData.forEach((dataPoint, index) => {
         const { postingDate } = dataPoint;
         let qnty = 0;
         if (indexedMoveData[num]) {
+          reorderQnty = Number(indexedMoveData[num].reorderQnty);
+          maxQnty = Number(indexedMoveData[num].maxQnty);
+          chartLowerBound = new Date(indexedMoveData[num].chartLowerBound);
           if (index === 0) {
             qnty = indexedMoveData[num][`${postingDate}`] ?
               Number(indexedMoveData[num][`${postingDate}`].qntyMoved) : 0;
@@ -64,7 +75,7 @@ export default class Charts extends Component {
               chartDataArr[index][1];
           }
         }
-        chartDataArr.push([ new Date(postingDate), qnty, 1, 2 ]);
+        chartDataArr.push([ new Date(postingDate), qnty, reorderQnty, maxQnty ]);
       });
 
       return (
@@ -81,7 +92,7 @@ export default class Charts extends Component {
               hAxis: {
                 format: 'MMM-yy',
                 viewWindow: {
-                  min: new Date(2012, 1),
+                  min: chartLowerBound,
                   max: new Date(2019, 5)
                 }
               },
