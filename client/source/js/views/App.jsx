@@ -7,6 +7,7 @@ import Home from 'views/Home';
 import People from 'views/People';
 import Charts from 'views/Charts';
 import NotFound from 'views/NotFound';
+import Landing from 'views/Landing';
 
 
 class App extends Component {
@@ -20,6 +21,7 @@ class App extends Component {
             <Route exact path={ routeCodes.HOME } component={ Home } />
             <Route path={ routeCodes.PEOPLE } component={ People } />
             <Route path={ routeCodes.CHARTS } component={ Charts } />
+            <Route path={ routeCodes.LANDING } component={ Landing } />
             <Route path='*' component={ NotFound } />
           </Switch>
         </div>

@@ -49,7 +49,8 @@ export default class Charts extends Component {
         chartLowerBound,
         currentQnty,
         header,
-        movingPrice
+        movingPrice,
+        plannedDelivTime
       } = entry;
       if (indexedMoveData[`${mtrlNum}`]) {
         indexedMoveData[`${mtrlNum}`][`${postingDate}`] = { qntyMoved };
@@ -60,7 +61,8 @@ export default class Charts extends Component {
           chartLowerBound,
           currentQnty,
           header,
-          movingPrice
+          movingPrice,
+          plannedDelivTime
         };
         indexedMoveData[`${mtrlNum}`][`${postingDate}`] = { qntyMoved };
       }
@@ -73,6 +75,7 @@ export default class Charts extends Component {
       let currentQnty = 0;
       let header = '';
       let movingPrice = 0;
+      let plannedDelivTime = 'NA';
       let chartLowerBound = new Date(2012, 1);
 
       defaultChartData.forEach((dataPoint, index) => {
@@ -84,6 +87,7 @@ export default class Charts extends Component {
           currentQnty = Number(indexedMoveData[num].currentQnty);
           header = indexedMoveData[num].header;
           movingPrice = Math.round(Number(indexedMoveData[num].movingPrice));
+          plannedDelivTime = indexedMoveData[num].plannedDelivTime;
           chartLowerBound = new Date(indexedMoveData[num].chartLowerBound);
           if (index === 0) {
             qnty = indexedMoveData[num][`${postingDate}`] ?
@@ -99,7 +103,10 @@ export default class Charts extends Component {
 
       return (
         <div className='my-pretty-chart-container' key={num}>
-          { `MM ${num}, Current Qnty ${currentQnty}, ${header}, Unit Price $${movingPrice}` }
+          {
+            `MM ${num}, Current Qnty ${currentQnty}, ${header}, Unit Price $${movingPrice},
+            Total Current Value $${movingPrice * currentQnty}, Planned Deliv Time ${plannedDelivTime} Days`
+          }
           <Chart
             width={'600px'}
             height={'400px'}

@@ -27,8 +27,10 @@ export default class NotFound extends Component {
   render() {
     return (
       <RouteStatus code={ 404 }>
-        <div className='NotFound'>
-          <h1>Not Found</h1>
+        <div className='NotFound columns'>
+          <div className='column is-two-fifth is-green has-background-primary'>
+            <h1>Not Found</h1>
+          </div>
         </div>
       </RouteStatus>
     );
