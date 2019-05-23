@@ -8,7 +8,7 @@ export default class Menu extends Component {
   render() {
     return (
 
-      <nav className='navbar' role='navigation' aria-label='main navigation'>
+      <nav className='navbar is-dark' role='navigation' aria-label='main navigation'>
         <div className='navbar-brand'>
           <a className='navbar-item' href='https://bulma.io'>
             <img src={logo} width='28' height='28' />

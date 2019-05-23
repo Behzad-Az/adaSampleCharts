@@ -59,34 +59,34 @@ export default class Landing extends Component {
             </div>
 
             <div className='list is-hoverable'>
-              <a className='list-item is-light'>
+              <a className='list-item is-light has-text-dark'>
                 <span className='icon is-left'><i className='fas fa-exclamation-circle' /></span> MM# xyzxyzxyz
               </a>
-              <a className='list-item'>
+              <a className='list-item has-text-dark'>
                 <span className='icon is-left'><i className='fas fa-exclamation-circle' /></span> MM# xyzxyzxyz
               </a>
-              <a className='list-item is-active'>
+              <a className='list-item is-link is-active'>
                 <span className='icon is-left'><i className='fas fa-exclamation-circle' /></span> MM# 11093090
               </a>
-              <a className='list-item'>
+              <a className='list-item has-text-dark'>
                 <span className='icon is-left'><i className='fas fa-exclamation-circle' /></span> MM# xyzxyzxyz
               </a>
-              <a className='list-item'>
+              <a className='list-item has-text-dark'>
                 <span className='icon is-left'><i className='fas fa-exclamation-circle' /></span> MM# xyzxyzxyz
               </a>
-              <a className='list-item'>
+              <a className='list-item has-text-dark'>
                 <span className='icon is-left'><i className='fas fa-exclamation-circle' /></span> MM# xyzxyzxyz
               </a>
-              <a className='list-item'>
+              <a className='list-item has-text-dark'>
                 <span className='icon is-left'><i className='fas fa-exclamation-circle' /></span> MM# xyzxyzxyz
               </a>
-              <a className='list-item'>
+              <a className='list-item has-text-dark'>
                 <span className='icon is-left'><i className='fas fa-exclamation-circle' /></span> MM# xyzxyzxyz
               </a>
-              <a className='list-item'>
+              <a className='list-item has-text-dark'>
                 <span className='icon is-left'><i className='fas fa-exclamation-circle' /></span> MM# xyzxyzxyz
               </a>
-              <a className='list-item'>
+              <a className='list-item has-text-dark'>
                 <span className='icon is-left'><i className='fas fa-exclamation-circle' /></span> MM# xyzxyzxyz
               </a>
               <a className='list-item'>
