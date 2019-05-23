@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import { routeCodes } from 'constants/routes';
 import workAndCoLogoImg from 'img/workco-logo.svg';
+import logo from 'img/adaLogo.png';
 
 export default class Menu extends Component {
   render() {
@@ -10,7 +11,7 @@ export default class Menu extends Component {
       <nav className='navbar' role='navigation' aria-label='main navigation'>
         <div className='navbar-brand'>
           <a className='navbar-item' href='https://bulma.io'>
-            <img src='https://bulma.io/images/bulma-logo.png' width='112' height='28' />
+            <img src={logo} width='28' height='28' />
           </a>
 
           <a role='button' className='navbar-burger burger' aria-label='menu' aria-expanded='false' data-target='navbarBasicExample'>

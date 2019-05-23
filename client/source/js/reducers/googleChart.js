@@ -9,7 +9,7 @@ import {
 const initialState = Map({
   loading: false,
   error: null,
-  googleChart: null,
+  data: null,
 });
 
 const actionsMap = {
@@ -18,7 +18,7 @@ const actionsMap = {
     return state.merge(Map({
       loading: true,
       error: null,
-      googleChart: null,
+      data: null,
     }));
   },
   [GET_GOOGLECHART_ERROR]: (state, action) => {
@@ -30,7 +30,7 @@ const actionsMap = {
   [GET_GOOGLECHART_SUCCESS]: (state, action) => {
     return state.merge(Map({
       loading: false,
-      googleChart: action.data,
+      data: action.data,
     }));
   },
 };

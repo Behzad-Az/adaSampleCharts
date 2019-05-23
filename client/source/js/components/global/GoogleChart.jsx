@@ -9,14 +9,14 @@ import { defaultChartData } from 'constants/defaultChartData';
 @connect(state => ({
   error: state.googleChart.get('error'),
   loading: state.googleChart.get('loading'),
-  chart: state.googleChart.get('googleChart'),
+  data: state.googleChart.get('data'),
 }))
 
 export default class GoogleChart extends Component {
   static propTypes = {
     error: PropTypes.string,
     loading: PropTypes.bool,
-    googleChart: PropTypes.object,
+    data: PropTypes.object,
     // from react-redux connect
     dispatch: PropTypes.func,
   }
@@ -24,44 +24,115 @@ export default class GoogleChart extends Component {
   componentWillMount() {
     const {
       dispatch,
-      googleChart,
+      data,
     } = this.props;
 
-    if (!googleChart) {
+    if (!data) {
       dispatch(getGoogleChart(11093090));
     }
   }
 
-  render() {
-    // const {
-    //   loading,
-    //   error,
-    //   charts,
-    // } = this.props;
 
-    return (
-      <div className='google-chart column'>
-        <div className='card'>
-          <div className='card-image'>
-            <figure className='image is-3by2 is-marginless'>
-              <img src='https://bulma.io/images/placeholders/480x320.png' alt='Placeholder image' />
-            </figure>
-          </div>
+  renderGooglChart() {
+
+    const {
+      loading,
+      error,
+      data
+    } = this.props;
+
+    if (data) {
+      const { rawMtrlMoveData, mtrlNum } = data;
+
+      let chartDataArr = [['date', 'Qnty', 'min', 'max']];
+      let currentQnty = 0;
+      // const mtrlNum = rawMtrlMoveData[0].mtrlNum;
+      const reorderQnty = Number(rawMtrlMoveData[0].reorderQnty);
+      const maxQnty = Number(rawMtrlMoveData[0].maxQnty);
+      const header = rawMtrlMoveData[0].header;
+      const movingPrice = Number(rawMtrlMoveData[0].movingPrice);
+      const plannedDelivTime = Number(rawMtrlMoveData[0].plannedDelivTime);
+      const chartLowerBound = new Date(rawMtrlMoveData[0].chartLowerBound);
+
+      defaultChartData.map((dataPoint, index) => {
+        if (index === 0) {
+          currentQnty = dataPoint.qnty;
+          chartDataArr.push([
+            new Date (dataPoint.postingDate),
+            currentQnty,
+            reorderQnty,
+            maxQnty
+          ]);
+        }
+        else {
+          const movedData = rawMtrlMoveData.find(move => move.postingDate === dataPoint.postingDate);
+          currentQnty = movedData ? currentQnty + Number(movedData.qntyMoved) : currentQnty;
+          chartDataArr.push([
+            new Date (dataPoint.postingDate),
+            currentQnty,
+            reorderQnty,
+            maxQnty
+          ]);
+        }
+      });
+
+      return (
+        <div>
+          <Chart
+            width={'100%'}
+            height={'320px'}
+            chartType='LineChart'
+            loader={<div>Loading Chart</div>}
+            data={chartDataArr}
+            options={{
+              legend: {
+                position: 'top',
+                alignment: 'center'
+              },
+              hAxis: {
+                format: 'MMM-yy',
+                viewWindow: {
+                  min: chartLowerBound,
+                  max: new Date(2019, 5, 2)
+                }
+              },
+              vAxis: {
+                title: 'Quantity',
+                viewWindow: {
+                  min: 0
+                }
+              },
+              series: {
+                0: { curveType: 'function' },
+              },
+            }}
+            rootProps={{ 'data-testid': '2' }}
+          />
+
           <div className='card-content'>
-
-
             <article className='media'>
               <div className='media-content'>
                 <div className='content'>
                   <p>
-                    <strong>Kayli Eunice </strong>
+                    <strong>{`MM ${mtrlNum}, ${header}`}</strong>
                     <br />
-                    Sed convallis scelerisque mauris, non pulvinar nunc mattis vel. Maecenas varius felis sit amet magna vestibulum euismod malesuada cursus libero. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Phasellus lacinia non nisl id feugiat.
-                    <br />
-                    <small><a>Like</a> · <a>Reply</a> · 2 hrs</small>
+                    {
+                      `Current Qnty ${currentQnty}, Unit Price $${movingPrice},
+                      Total Current Value $${movingPrice * currentQnty}, Planned Deliv Time ${plannedDelivTime} Days`
+                    }
                   </p>
                 </div>
               </div>
+
+              <nav className='level'>
+                <div className='level-right'>
+                  <p className='level-item'><a className='button is-success'>Acknowledge</a></p>
+                </div>
+              </nav>
+
+
+
+
             </article>
 
             <article className='media'>
@@ -88,6 +159,40 @@ export default class GoogleChart extends Component {
               </div>
             </article>
 
+
+
+
+          </div>
+        </div>
+      );
+
+    } else {
+      return (
+        <figure className='image is-3by2 is-marginless'>
+          <img src='https://bulma.io/images/placeholders/480x320.png' alt='Placeholder image' />
+        </figure>
+      );
+    }
+
+  }
+
+
+
+
+
+
+  render() {
+    const {
+      loading,
+      error,
+      data,
+    } = this.props;
+
+    return (
+      <div className='google-chart column'>
+        <div className='card'>
+          <div className='card-image'>
+            { data && this.renderGooglChart() }
           </div>
         </div>
       </div>

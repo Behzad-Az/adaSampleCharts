@@ -59,38 +59,38 @@ export default class Landing extends Component {
             </div>
 
             <div className='list is-hoverable'>
-              <a className='list-item'>
-                Featured
+              <a className='list-item is-light'>
+                <span className='icon is-left'><i className='fas fa-exclamation-circle' /></span> MM# xyzxyzxyz
               </a>
               <a className='list-item'>
-                All Posts
+                <span className='icon is-left'><i className='fas fa-exclamation-circle' /></span> MM# xyzxyzxyz
               </a>
               <a className='list-item is-active'>
-                Announcements
+                <span className='icon is-left'><i className='fas fa-exclamation-circle' /></span> MM# 11093090
               </a>
               <a className='list-item'>
-                Business
+                <span className='icon is-left'><i className='fas fa-exclamation-circle' /></span> MM# xyzxyzxyz
               </a>
               <a className='list-item'>
-                Community
+                <span className='icon is-left'><i className='fas fa-exclamation-circle' /></span> MM# xyzxyzxyz
               </a>
               <a className='list-item'>
-                Data
+                <span className='icon is-left'><i className='fas fa-exclamation-circle' /></span> MM# xyzxyzxyz
               </a>
               <a className='list-item'>
-                Editor Tools
+                <span className='icon is-left'><i className='fas fa-exclamation-circle' /></span> MM# xyzxyzxyz
               </a>
               <a className='list-item'>
-                Education
+                <span className='icon is-left'><i className='fas fa-exclamation-circle' /></span> MM# xyzxyzxyz
               </a>
               <a className='list-item'>
-                Engineering
+                <span className='icon is-left'><i className='fas fa-exclamation-circle' /></span> MM# xyzxyzxyz
               </a>
               <a className='list-item'>
-                Events
+                <span className='icon is-left'><i className='fas fa-exclamation-circle' /></span> MM# xyzxyzxyz
               </a>
               <a className='list-item'>
-                Policy
+                <span className='icon is-left'><i className='fas fa-exclamation-circle' /></span> MM# xyzxyzxyz
               </a>
             </div>
           </div>
