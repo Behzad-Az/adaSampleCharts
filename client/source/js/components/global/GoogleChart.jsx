@@ -28,7 +28,7 @@ export default class GoogleChart extends Component {
     } = this.props;
 
     if (!googleChart) {
-      dispatch(getGoogleChart());
+      dispatch(getGoogleChart(11093090));
     }
   }
 

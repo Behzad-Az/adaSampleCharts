@@ -26,13 +26,18 @@ const PORT = process.env.PORT || 3000;
 // ***************************************************
 // HELPERS
 // ***************************************************
+const getChartData = require('./helpers/GetRoutes/getChartData.js');
 const getChartsData = require('./helpers/GetRoutes/getChartsData.js');
 
 
 // ***************************************************
 // ROUTES - GET
 // ***************************************************
-app.get('/', (req, res) => res.send('Hello Worldq!'));
+app.get('/', (req, res) => res.send('Hello World!'));
+
+app.get('/api/chart', (req, res) => {
+  getChartData(req, res, knex);
+});
 
 app.get('/api/charts', (req, res) => {
   getChartsData(req, res, knex);

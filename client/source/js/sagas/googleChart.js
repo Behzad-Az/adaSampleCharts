@@ -12,7 +12,7 @@ import api from 'api/googleChart';
 function createGetGoogleChart(isServer = false) {
   return function* (options) { // eslint-disable-line consistent-return
     try {
-      const data = yield call(() => api.getGoogleChart(options.id));
+      const data = yield call(() => api.getGoogleChart(options.chartId));
       const action = { type: GET_GOOGLECHART_SUCCESS, data };
 
       if (isServer) {

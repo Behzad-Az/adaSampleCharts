@@ -105,8 +105,8 @@ const fetchResource = (path, userOptions = {}) => {
     });
 };
 
-function getGoogleChart() {
-  return fetchResource('googleChart/');
+function getGoogleChart(chartId) {
+  return fetchResource(`chart?mtrlNum=${chartId}`);
 }
 
 export default {
