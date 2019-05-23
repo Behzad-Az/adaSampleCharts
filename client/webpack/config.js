@@ -135,7 +135,7 @@ if (IS_PRODUCTION || SERVER_RENDER) {
 } else {
   rules.push(
     {
-      test: /\.css$/,
+      test: /\.(scss|css)$/,
       exclude: /node_modules/,
       use: [
         {
@@ -152,6 +152,10 @@ if (IS_PRODUCTION || SERVER_RENDER) {
         {
           loader: 'postcss-loader',
           options: { sourceMap: true },
+        },
+        {
+          loader: 'sass-loader',
+          options: { sourceMap: IS_DEVELOPMENT, },
         },
       ],
     }

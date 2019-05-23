@@ -11,7 +11,8 @@ import configureStore from 'config/store';
 import App from 'views/App';
 
 // Load CSS
-import 'index.css';
+// import 'index.css';
+import 'index.scss';
 
 const store = configureStore().store;
 

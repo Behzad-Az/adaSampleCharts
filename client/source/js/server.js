@@ -16,7 +16,8 @@ import App from 'views/App';
 import { getPeopleServer } from 'sagas/people';
 
 // Load SCSS
-import 'index.css';
+// import 'index.css';
+import 'index.scss';
 
 const app = express();
 const hostname = 'localhost';
