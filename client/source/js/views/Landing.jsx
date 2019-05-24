@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import GoogleChart from 'components/global/GoogleChart';
+import MtrlList from 'components/global/MtrlList';
 import { defaultChartData } from 'constants/defaultChartData';
 
 @connect(state => ({
@@ -58,44 +59,12 @@ export default class Landing extends Component {
               </div>
             </div>
 
-            <div className='list is-hoverable'>
-              <a className='list-item is-light has-text-dark'>
-                <span className='icon is-left'><i className='fas fa-exclamation-circle' /></span> MM# xyzxyzxyz
-              </a>
-              <a className='list-item has-text-dark'>
-                <span className='icon is-left'><i className='fas fa-exclamation-circle' /></span> MM# xyzxyzxyz
-              </a>
-              <a className='list-item is-link is-active'>
-                <span className='icon is-left'><i className='fas fa-exclamation-circle' /></span> MM# 11093090
-              </a>
-              <a className='list-item has-text-dark'>
-                <span className='icon is-left'><i className='fas fa-exclamation-circle' /></span> MM# xyzxyzxyz
-              </a>
-              <a className='list-item has-text-dark'>
-                <span className='icon is-left'><i className='fas fa-exclamation-circle' /></span> MM# xyzxyzxyz
-              </a>
-              <a className='list-item has-text-dark'>
-                <span className='icon is-left'><i className='fas fa-exclamation-circle' /></span> MM# xyzxyzxyz
-              </a>
-              <a className='list-item has-text-dark'>
-                <span className='icon is-left'><i className='fas fa-exclamation-circle' /></span> MM# xyzxyzxyz
-              </a>
-              <a className='list-item has-text-dark'>
-                <span className='icon is-left'><i className='fas fa-exclamation-circle' /></span> MM# xyzxyzxyz
-              </a>
-              <a className='list-item has-text-dark'>
-                <span className='icon is-left'><i className='fas fa-exclamation-circle' /></span> MM# xyzxyzxyz
-              </a>
-              <a className='list-item has-text-dark'>
-                <span className='icon is-left'><i className='fas fa-exclamation-circle' /></span> MM# xyzxyzxyz
-              </a>
-              <a className='list-item'>
-                <span className='icon is-left'><i className='fas fa-exclamation-circle' /></span> MM# xyzxyzxyz
-              </a>
-            </div>
+            <MtrlList />
           </div>
 
-          <GoogleChart />
+          <div className='column'>
+            <GoogleChart />
+          </div>
 
         </div>
       </div>

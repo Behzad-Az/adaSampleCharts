@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { getGoogleChart } from 'actions/googleChart';
 import { Chart } from 'react-google-charts';
 import { defaultChartData } from 'constants/defaultChartData';
@@ -189,11 +188,9 @@ export default class GoogleChart extends Component {
     } = this.props;
 
     return (
-      <div className='google-chart column'>
-        <div className='card'>
-          <div className='card-image'>
-            { data && this.renderGooglChart() }
-          </div>
+      <div className='google-chart card'>
+        <div className='card-image'>
+          { data && this.renderGooglChart() }
         </div>
       </div>
     );

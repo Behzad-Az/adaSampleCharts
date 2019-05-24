@@ -33,7 +33,7 @@ function createGetGoogleChart(isServer = false) {
 }
 
 export const getGoogleChart = createGetGoogleChart();
-export const getCGoogleChartServer = createGetGoogleChart(true);
+export const getGoogleChartServer = createGetGoogleChart(true);
 
 
 export function* getGoogleChartWatcher() {

@@ -26,6 +26,7 @@ const PORT = process.env.PORT || 3000;
 // ***************************************************
 // HELPERS
 // ***************************************************
+const getMtrlList = require('./helpers/GetRoutes/getMtrlList.js');
 const getChartData = require('./helpers/GetRoutes/getChartData.js');
 const getChartsData = require('./helpers/GetRoutes/getChartsData.js');
 
@@ -34,6 +35,10 @@ const getChartsData = require('./helpers/GetRoutes/getChartsData.js');
 // ROUTES - GET
 // ***************************************************
 app.get('/', (req, res) => res.send('Hello World!'));
+
+app.get('/api/mtrlList', (req, res) => {
+  getMtrlList(req, res, knex);
+});
 
 app.get('/api/chart', (req, res) => {
   getChartData(req, res, knex);
