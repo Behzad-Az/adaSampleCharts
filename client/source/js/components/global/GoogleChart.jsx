@@ -81,7 +81,7 @@ export default class GoogleChart extends Component {
             width={'100%'}
             height={'320px'}
             chartType='LineChart'
-            loader={<div>Loading Chart</div>}
+            loader={<div>Loading chart data...</div>}
             data={chartDataArr}
             options={{
               legend: {
@@ -109,6 +109,7 @@ export default class GoogleChart extends Component {
           />
 
           <div className='card-content'>
+
             <article className='media'>
               <div className='media-content'>
                 <div className='content'>
@@ -122,16 +123,11 @@ export default class GoogleChart extends Component {
                   </p>
                 </div>
               </div>
-
               <nav className='level'>
                 <div className='level-right'>
                   <p className='level-item'><a className='button is-success'>Acknowledge</a></p>
                 </div>
               </nav>
-
-
-
-
             </article>
 
             <article className='media'>
@@ -158,13 +154,15 @@ export default class GoogleChart extends Component {
               </div>
             </article>
 
-
-
-
           </div>
         </div>
       );
 
+    } else if (loading) {
+      console.log("i'm here loading: ");
+      return <p>Loading chart data...</p>;
+    } else if (error) {
+      return <p>Encountered error while loading chart</p>;
     } else {
       return (
         <figure className='image is-3by2 is-marginless'>
@@ -181,16 +179,10 @@ export default class GoogleChart extends Component {
 
 
   render() {
-    const {
-      loading,
-      error,
-      data,
-    } = this.props;
-
     return (
       <div className='google-chart card'>
         <div className='card-image'>
-          { data && this.renderGooglChart() }
+          { this.renderGooglChart() }
         </div>
       </div>
     );
