@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { getMtrlList } from 'actions/mtrlList';
+import { getMtrlList, setSelectedMtrl } from 'actions/mtrlList';
 import { getGoogleChart } from 'actions/googleChart';
 
 @connect(state => ({
   error: state.mtrlList.get('error'),
   loading: state.mtrlList.get('loading'),
   data: state.mtrlList.get('data'),
+  selectedMtrlNum: state.mtrlList.get('selectedMtrlNum')
 }))
 
 export default class Landing extends Component {
@@ -30,11 +31,19 @@ export default class Landing extends Component {
     }
   }
 
+  selectMtrl(newSelection) {
+    const { dispatch, selectedMtrlNum } = this.props;
+    if (newSelection && newSelection !== selectedMtrlNum) {
+      dispatch(getGoogleChart(Number(newSelection)));
+      dispatch(setSelectedMtrl(newSelection));
+    }
+  }
+
   renderMtrl(mtrl) {
     const { mtrlNum } = mtrl;
-    const className = Number(mtrlNum) === 11093090 ? 'list-item is-link is-active' : 'list-item has-text-dark';
+    const className = mtrlNum === this.props.selectedMtrlNum ? 'list-item is-link is-active' : 'list-item has-text-dark';
     return (
-      <a className={className} key={mtrlNum} onClick={() => this.props.dispatch(getGoogleChart(Number(mtrlNum)))}>
+      <a className={className} key={mtrlNum} onClick={() => this.selectMtrl(mtrlNum)}>
         <span className='icon is-left'><i className='fas fa-exclamation-circle' /></span> {` MM ${mtrl.mtrlNum}`}
       </a>
     );
@@ -48,7 +57,7 @@ export default class Landing extends Component {
     } = this.props;
     if (data) {
       return (
-        <div className='list is-hoverable'>
+        <div className='mtrl-list list is-hoverable'>
           { data.mtrlList.map(mtrl => this.renderMtrl(mtrl)) }
         </div>
       );

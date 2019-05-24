@@ -21,14 +21,14 @@ export default class GoogleChart extends Component {
   }
 
   componentWillMount() {
-    const {
-      dispatch,
-      data,
-    } = this.props;
+    // const {
+    //   dispatch,
+    //   data,
+    // } = this.props;
 
-    if (!data) {
-      dispatch(getGoogleChart(11093090));
-    }
+    // if (!data) {
+    //   dispatch(getGoogleChart(11093090));
+    // }
   }
 
 

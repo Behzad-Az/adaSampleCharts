@@ -4,12 +4,14 @@ import {
   GET_MTRLLIST_START,
   GET_MTRLLIST_ERROR,
   GET_MTRLLIST_SUCCESS,
+  SET_SELECTED_MTRL,
 } from 'actions/mtrlList';
 
 const initialState = Map({
   loading: false,
   error: null,
   data: null,
+  selectedMtrlNum: null
 });
 
 const actionsMap = {
@@ -33,6 +35,11 @@ const actionsMap = {
       data: action.data,
     }));
   },
+  [SET_SELECTED_MTRL]: (state, action) => {
+    return state.merge(Map({
+      selectedMtrlNum: action.newSelection
+    }));
+  }
 };
 
 export default function reducer(state = initialState, action = {}) {
