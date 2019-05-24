@@ -36,6 +36,9 @@ export default class Landing extends Component {
       <div className='card'>
         <header className='card-header'>
           <p className='card-header-title'>
+            <span className='icon is-left'>
+              <i className='far fa-clock' />
+            </span>
             Lesson Learned
           </p>
           <a href='#' className='card-header-icon' aria-label='more options'>
@@ -48,7 +51,7 @@ export default class Landing extends Component {
           <div className='content'>
             Incompatibility of windshields on older and newer PC8000 shovels.
             <br />
-            <time datetime='2016-1-1'>1 Jan 2016</time>
+            <small><time dateTime='2016-1-1'>1 Jan 2016</time></small>
           </div>
         </div>
         <footer className='card-footer'>

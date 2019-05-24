@@ -40,11 +40,32 @@ export default class Landing extends Component {
   }
 
   renderMtrl(mtrl) {
-    const { mtrlNum } = mtrl;
-    const className = mtrlNum === this.props.selectedMtrlNum ? 'list-item is-link is-active' : 'list-item has-text-dark';
+    const { mtrlNum, header } = mtrl;
+    const active = mtrlNum === this.props.selectedMtrlNum ? 'list-item is-link is-active' : 'list-item has-text-dark';
+    const randomGenerator = Math.floor(Math.random() * 4);
+    let icon;
+
+    switch(randomGenerator) {
+      case 0:
+        icon = 'fas fa-search-dollar';
+        break;
+      case 1:
+        icon = 'fas fa-chart-line';
+        break;
+      case 2:
+        icon = 'far fa-clock';
+        break;
+      default:
+        icon = 'fas fa-exclamation-circle';
+        break;
+    }
+
+    console.log("i'm here icon: ", icon);
+
     return (
-      <a className={className} key={mtrlNum} onClick={() => this.selectMtrl(mtrlNum)}>
-        <span className='icon is-left'><i className='fas fa-exclamation-circle' /></span> {` MM ${mtrl.mtrlNum}`}
+      <a className={active} key={mtrlNum} onClick={() => this.selectMtrl(mtrlNum)}>
+        <p><span className='icon is-left'><i className={icon} /></span> {` MM ${mtrl.mtrlNum}`} </p>
+        <p className='is-size-7'>{header}</p>
       </a>
     );
   }
