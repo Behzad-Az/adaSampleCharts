@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import GoogleChart from 'components/global/GoogleChart';
 import MtrlList from 'components/global/MtrlList';
+import LessonLearnedBox from 'components/global/LessonLearnedBox';
 import { defaultChartData } from 'constants/defaultChartData';
 
 @connect(state => ({
@@ -60,6 +61,7 @@ export default class Landing extends Component {
             </div>
 
             <MtrlList />
+            <LessonLearnedBox />
           </div>
 
           <div className='column'>
