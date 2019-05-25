@@ -60,8 +60,6 @@ export default class Landing extends Component {
         break;
     }
 
-    console.log("i'm here icon: ", icon);
-
     return (
       <a className={active} key={mtrlNum} onClick={() => this.selectMtrl(mtrlNum)}>
         <p className='has-text-weight-bold is-size-6'><span className='icon is-left'><i className={icon} /></span> {` MM ${mtrl.mtrlNum}`} </p>

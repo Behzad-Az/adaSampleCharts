@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { getGoogleChart } from 'actions/googleChart';
 import { Chart } from 'react-google-charts';
 import { defaultChartData } from 'constants/defaultChartData';
+import logo from 'img/adaLogoLarge.png';
 
 @connect(state => ({
   error: state.googleChart.get('error'),
@@ -123,11 +124,6 @@ export default class GoogleChart extends Component {
                   </p>
                 </div>
               </div>
-              <nav className='level'>
-                <div className='level-right'>
-                  <p className='level-item'><a className='button is-success'>Acknowledge</a></p>
-                </div>
-              </nav>
             </article>
 
             <article className='media'>
@@ -138,6 +134,7 @@ export default class GoogleChart extends Component {
                     <br />
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros, eu pellentesque tortor vestibulum ut. Maecenas non massa sem. Etiam finibus odio quis feugiat facilisis.
                   </p>
+                  <p className='has-text-right has-size-7'><small><a>Saveq</a> · <a>Comment</a> · <a>Acknowledge</a></small></p>
                 </div>
               </div>
             </article>
@@ -159,14 +156,13 @@ export default class GoogleChart extends Component {
       );
 
     } else if (loading) {
-      console.log("i'm here loading: ");
       return <p>Loading chart data...</p>;
     } else if (error) {
       return <p>Encountered error while loading chart</p>;
     } else {
       return (
-        <figure className='image is-3by2 is-marginless'>
-          <img src='https://bulma.io/images/placeholders/480x320.png' alt='Placeholder image' />
+        <figure className='image is-1by1 is-marginless'>
+          <img src={logo} alt='Placeholder image' />
         </figure>
       );
     }
