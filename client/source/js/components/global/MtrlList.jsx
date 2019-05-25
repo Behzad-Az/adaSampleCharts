@@ -64,8 +64,8 @@ export default class Landing extends Component {
 
     return (
       <a className={active} key={mtrlNum} onClick={() => this.selectMtrl(mtrlNum)}>
-        <p><span className='icon is-left'><i className={icon} /></span> {` MM ${mtrl.mtrlNum}`} </p>
-        <p className='is-size-7'>{header}</p>
+        <p className='has-text-weight-bold is-size-6'><span className='icon is-left'><i className={icon} /></span> {` MM ${mtrl.mtrlNum}`} </p>
+        <p className='is-size-8'>{header}</p>
       </a>
     );
   }

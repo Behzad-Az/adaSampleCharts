@@ -4,7 +4,7 @@ const getChartData = (req, res, knex) => {
 
   knex('mtrlMetaInfo')
   .select('mtrlNum', 'header')
-  .limit(5)
+  .limit(7)
   .then(mtrlList => res.send({ mtrlList }))
   .catch(err => {
     console.log('Error in getMtrlList.js: ', err);
