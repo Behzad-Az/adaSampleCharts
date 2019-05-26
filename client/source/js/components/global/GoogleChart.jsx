@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { getGoogleChart } from 'actions/googleChart';
+// import { getGoogleChart } from 'actions/googleChart';
 import { Chart } from 'react-google-charts';
 import { defaultChartData } from 'constants/defaultChartData';
 import logo from 'img/adaLogoLarge.png';
