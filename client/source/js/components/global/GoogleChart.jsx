@@ -56,24 +56,19 @@ export default class GoogleChart extends Component {
 
       defaultChartData.map((dataPoint, index) => {
         if (index === 0) {
-          currentQnty = dataPoint.qnty;
-          chartDataArr.push([
-            new Date (dataPoint.postingDate),
-            currentQnty,
-            reorderQnty,
-            maxQnty
-          ]);
+          currentQnty = Number(dataPoint.qnty);
         }
         else {
           const movedData = rawMtrlMoveData.find(move => move.postingDate === dataPoint.postingDate);
           currentQnty = movedData ? currentQnty + Number(movedData.qntyMoved) : currentQnty;
-          chartDataArr.push([
-            new Date (dataPoint.postingDate),
-            currentQnty,
-            reorderQnty,
-            maxQnty
-          ]);
         }
+        chartDataArr.push([
+          new Date(dataPoint.postingDate),
+          currentQnty,
+          reorderQnty,
+          maxQnty
+        ]);
+
       });
 
       return (
@@ -130,11 +125,11 @@ export default class GoogleChart extends Component {
               <div className='media-content'>
                 <div className='content'>
                   <p>
-                    <strong>John Smith</strong> <small>@johnsmith</small> <small>31m</small>
+                    <strong>ADA</strong><small> - 31m ago</small>
                     <br />
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros, eu pellentesque tortor vestibulum ut. Maecenas non massa sem. Etiam finibus odio quis feugiat facilisis.
                   </p>
-                  <p className='has-text-right has-size-7'><small><a>Saveq</a> · <a>Comment</a> · <a>Acknowledge</a></small></p>
+                  <p className='has-text-right has-size-7'><small><a>Save</a> · <a>Comment</a> · <a>Acknowledge</a></small></p>
                 </div>
               </div>
             </article>
