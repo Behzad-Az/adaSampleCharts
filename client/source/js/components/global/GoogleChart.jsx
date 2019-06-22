@@ -43,17 +43,17 @@ export default class GoogleChart extends Component {
     if (data) {
       const { rawMtrlComments } = data;
       return rawMtrlComments.map(comment => {
-        const { postingDate, createdBy, content, id } = comment;
+        const { postingDate, createdBy, content, acknowledgeable, acknowledged, id } = comment;
         return (
           <article className='media' key={id}>
             <div className='media-content'>
               <div className='content'>
                 <p>
-                  <strong>{createdBy}</strong><small> - {postingDate.slice(0,10)}</small>
+                  <strong>{createdBy}</strong><small> on {postingDate.slice(0,10)}</small>
                   <br />
                   {content}
                 </p>
-                <p className='has-text-right has-size-7'><small><a>Save</a> · <a>Comment</a> · <a>Acknowledge</a></small></p>
+                { acknowledgeable && !acknowledged && <p className='has-text-right has-size-7'><small><a>Acknowledge</a></small></p> }
               </div>
             </div>
           </article>
@@ -104,7 +104,7 @@ export default class GoogleChart extends Component {
     if (data) {
       const { rawMtrlMoveData, mtrlNum } = data;
 
-      let chartDataArr = [['date', 'Qnty', 'min', 'max']];
+      let chartDataArr = [['Date', 'Quantity', 'Reorder Line', 'Maximum Line']];
       let currentQnty = 0;
       const reorderQnty = Number(rawMtrlMoveData[0].reorderQnty);
       const maxQnty = Number(rawMtrlMoveData[0].maxQnty);
@@ -210,7 +210,6 @@ export default class GoogleChart extends Component {
           </div>
         </div>
       );
-
     } else if (loading) {
       return <p>Loading chart data...</p>;
     } else if (error) {
@@ -224,11 +223,6 @@ export default class GoogleChart extends Component {
     }
 
   }
-
-
-
-
-
 
   render() {
     return (

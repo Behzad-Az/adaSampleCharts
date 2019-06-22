@@ -44,6 +44,8 @@ exports.up = function(knex, Promise) {
       t.string('createdBy', 30).notNullable().defaultTo('ADA');
       t.date('postingDate').notNullable();
       t.string('content', 1000).notNullable();
+      t.boolean('acknowledgeable').notNullable().defaultTo(false);
+      t.boolean('acknowledged').notNullable().defaultTo(false);
       t.timestamp(true, true);
       t.timestamp('deleted_at');
     })

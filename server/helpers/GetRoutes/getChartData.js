@@ -22,7 +22,7 @@ const getChartData = (req, res, knex) => {
 
   const getMtrlComments = () => knex('mtrlComments')
     .innerJoin('mtrlMetaInfo', 'mtrlComments.mtrlMetaInfoId', 'mtrlMetaInfo.id')
-    .select('postingDate', 'createdBy', 'content', 'mtrlComments.id')
+    .select('postingDate', 'createdBy', 'content', 'acknowledgeable', 'acknowledged', 'mtrlComments.id')
     .where('mtrlNum', mtrlNum)
     .orderBy('postingDate');
 
