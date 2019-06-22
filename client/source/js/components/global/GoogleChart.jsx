@@ -92,7 +92,6 @@ export default class GoogleChart extends Component {
     }
   }
 
-
   renderGoogleChart() {
 
     const {
@@ -103,7 +102,6 @@ export default class GoogleChart extends Component {
 
     if (data) {
       const { rawMtrlMoveData, mtrlNum } = data;
-
       let chartDataArr = [['Date', 'Quantity', 'Reorder Line', 'Maximum Line']];
       let currentQnty = 0;
       const reorderQnty = Number(rawMtrlMoveData[0].reorderQnty);
@@ -162,9 +160,7 @@ export default class GoogleChart extends Component {
             }}
             rootProps={{ 'data-testid': '2' }}
           />
-
           <div className='card-content'>
-
             <article className='media'>
               <div className='media-content'>
                 <div className='content'>
@@ -179,34 +175,7 @@ export default class GoogleChart extends Component {
                 </div>
               </div>
             </article>
-
             { this.renderMtrlComments() }
-
-            <article className='media'>
-              <div className='media-content'>
-                <div className='content'>
-                  <p>
-                    <strong>ADA</strong><small> - 31m ago</small>
-                    <br />
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros, eu pellentesque tortor vestibulum ut. Maecenas non massa sem. Etiam finibus odio quis feugiat facilisis.
-                  </p>
-                  <p className='has-text-right has-size-7'><small><a>Save</a> · <a>Comment</a> · <a>Acknowledge</a></small></p>
-                </div>
-              </div>
-            </article>
-
-            <article className='media'>
-              <div className='media-content'>
-                <div className='content'>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Phasellus nec iaculis mauris. <a>@bulmaio</a>.
-                  <a href='#'>#css</a> <a href='#'>#responsive</a>
-                  <br />
-                  <time dateTime='2016-1-1'>11:09 PM - 1 Jan 2016</time>
-                </div>
-              </div>
-            </article>
-
           </div>
         </div>
       );
@@ -221,7 +190,6 @@ export default class GoogleChart extends Component {
         </figure>
       );
     }
-
   }
 
   render() {
