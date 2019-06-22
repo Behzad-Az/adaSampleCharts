@@ -44,8 +44,7 @@ export default class Landing extends Component {
     const active = mtrlNum === this.props.selectedMtrlNum ? 'list-item is-link is-active' : 'list-item has-text-dark';
     const randomGenerator = Math.floor(Math.random() * 4);
     let icon;
-
-    if (Number(mtrlNum) === 11037462) {
+    if (Number(mtrlNum) === 11096900) {
       icon = 'fas fa-search-dollar';
     } else {
       switch(randomGenerator) {
@@ -63,10 +62,9 @@ export default class Landing extends Component {
         break;
       }
     }
-
     return (
       <a className={active} key={mtrlNum} onClick={() => this.selectMtrl(mtrlNum)}>
-        <p className='has-text-weight-bold'><span className='icon is-left'><i className={icon} /></span> {` MM ${mtrl.mtrlNum}`} </p>
+        <p className='has-text-weight-bold'><span className='icon is-left'><i className={icon} /></span> {` Part No. ${mtrl.mtrlNum}`} </p>
         <p className='is-size-8'>{header}</p>
       </a>
     );

@@ -28,7 +28,7 @@ export default class GoogleChart extends Component {
     // } = this.props;
 
     // if (!data) {
-    //   dispatch(getGoogleChart(11093090));
+    //   dispatch(getGoogleChart(11828311));
     // }
   }
 
@@ -135,7 +135,7 @@ export default class GoogleChart extends Component {
               <div className='media-content'>
                 <div className='content'>
                   <p className='is-size-6'>
-                    <strong>{`MM ${mtrlNum}, ${header}`} | Est. $300,000 in Savings</strong>
+                    <strong>{`Part No. ${mtrlNum} | ${header}`} | Est. $300,000 in Savings</strong>
                     <br />
                     <small>
                     {
@@ -180,7 +180,7 @@ export default class GoogleChart extends Component {
             { this.renderMtrlComments() }
           </div>
 
-          <div className='field is-grouped' style={{'justify-content': 'center'}}>
+          <div className='field is-grouped' style={{'justifyContent': 'center'}}>
             <p className='control'>
               <a className='button is-small is-dark'>
                 <span className='icon'><i className='fas fa-align-left fa-check-double' /></span><span>Acknowledge All</span>
@@ -192,11 +192,10 @@ export default class GoogleChart extends Component {
               </a>
             </p>
             <p className='control'>
-              <a className='button is-small is-dark' disabled>
+              <a className='button is-small is-dark'>
                 <span className='icon'><i className='fas fa-align-left fa-camera' /></span><span>See Photos</span>
               </a>
             </p>
-            list-alt
             <p className='control'>
               <a className='button is-small is-dark'>
                 <span className='icon'><i className='far fa-align-left fa-list-alt' /></span><span>See Long Description</span>

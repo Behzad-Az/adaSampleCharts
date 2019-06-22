@@ -2,7 +2,7 @@ const getChartData = (req, res, knex) => {
 
   knex('mtrlMetaInfo')
   .select('mtrlNum', 'header')
-  .whereIn('mtrlNum', [11037462, 11043884, 11091186, 11093090, 2032491, 2057777, 66091741])
+  .whereIn('mtrlNum', [11096900, 11931348, 11622628, 11828311, 2644258, 2985112, 67006468])
   .limit(8)
   .then(mtrlList => res.send({ mtrlList }))
   .catch(err => {

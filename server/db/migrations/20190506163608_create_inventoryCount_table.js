@@ -34,6 +34,7 @@ exports.up = function(knex, Promise) {
       t.string('orderNum', 30);
       t.decimal('qntyMoved').notNullable();
       t.string('purchaseOrderNum', 30);
+      t.string('storageLoc', 30).notNullable();
       t.timestamps(true, true);
       t.timestamp('deleted_at');
     }),

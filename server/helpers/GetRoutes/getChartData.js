@@ -8,17 +8,17 @@ const getChartData = (req, res, knex) => {
     .innerJoin('mtrlMetaInfo', 'mtrlMovements.mtrlMetaInfoId', 'mtrlMetaInfo.id')
     .sum('qntyMoved as qntyMoved')
     .select(
-      'mtrlMovements.postingDate', 'mtrlNum', 'reorderQnty', 'maxQnty',
+      'postingDate', 'mtrlNum', 'reorderQnty', 'maxQnty',
       'chartLowerBound', 'currentQnty', 'header', 'movingPrice',
       'plannedDelivTime'
     )
     .where('mtrlNum', mtrlNum)
     .groupBy(
-      'mtrlMovements.postingDate', 'mtrlNum', 'reorderQnty', 'maxQnty',
+      'postingDate', 'mtrlNum', 'reorderQnty', 'maxQnty',
       'chartLowerBound', 'currentQnty', 'header', 'movingPrice',
       'plannedDelivTime'
     )
-    .orderBy('mtrlMovements.postingDate', 'mtrlNum');
+    .orderBy('postingDate', 'mtrlNum');
 
   const getMtrlComments = () => knex('mtrlComments')
     .innerJoin('mtrlMetaInfo', 'mtrlComments.mtrlMetaInfoId', 'mtrlMetaInfo.id')

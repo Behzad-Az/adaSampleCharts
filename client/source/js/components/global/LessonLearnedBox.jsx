@@ -49,9 +49,9 @@ export default class Landing extends Component {
         </header>
         <div className='card-content'>
           <div className='content'>
-            Incompatibility of windshields on older and newer PC8000 shovels.
+            7495HF operators have reported parts incompatibility in newer and older machines.
             <br />
-            <small><time dateTime='2016-1-1'>1 Jan 2016</time></small>
+            <small><time dateTime='2016-1-1'>15 Jan 2019</time></small>
           </div>
         </div>
         <footer className='card-footer'>
