@@ -1,9 +1,8 @@
 const getChartData = (req, res, knex) => {
 
-  const { mtrlNum } = req.query;
-
   knex('mtrlMetaInfo')
   .select('mtrlNum', 'header')
+  .where('mtrlNum', 11037462)
   .limit(7)
   .then(mtrlList => res.send({ mtrlList }))
   .catch(err => {

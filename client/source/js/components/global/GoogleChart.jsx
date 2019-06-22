@@ -32,8 +32,68 @@ export default class GoogleChart extends Component {
     // }
   }
 
+  renderMtrlComments() {
 
-  renderGooglChart() {
+    const {
+      loading,
+      error,
+      data
+    } = this.props;
+
+    if (data) {
+      const { rawMtrlComments } = data;
+      return rawMtrlComments.map(comment => {
+        const { postingDate, createdBy, content, id } = comment;
+        return (
+          <article className='media' key={id}>
+            <div className='media-content'>
+              <div className='content'>
+                <p>
+                  <strong>{createdBy}</strong><small> - {postingDate.slice(0,10)}</small>
+                  <br />
+                  {content}
+                </p>
+                <p className='has-text-right has-size-7'><small><a>Save</a> · <a>Comment</a> · <a>Acknowledge</a></small></p>
+              </div>
+            </div>
+          </article>
+        );
+      })
+    } else if (loading) {
+      return (
+        <article className='media'>
+          <div className='media-content'>
+            <div className='content'>
+              <p>Loading comments...</p>
+            </div>
+          </div>
+        </article>
+      );
+    } else if (error) {
+      return (
+        <article className='media'>
+          <div className='media-content'>
+            <div className='content'>
+              <p>Encountered error while loading comments.</p>
+            </div>
+          </div>
+        </article>
+      );
+    } else {
+      return (
+        <article className='media'>
+          <div className='media-content'>
+            <div className='content'>
+              <p>No comment could be found.</p>
+            </div>
+          </div>
+        </article>
+      );
+    }
+  }
+
+
+  renderGoogleChart() {
 
     const {
       loading,
@@ -46,7 +106,6 @@ export default class GoogleChart extends Component {
 
       let chartDataArr = [['date', 'Qnty', 'min', 'max']];
       let currentQnty = 0;
-      // const mtrlNum = rawMtrlMoveData[0].mtrlNum;
       const reorderQnty = Number(rawMtrlMoveData[0].reorderQnty);
       const maxQnty = Number(rawMtrlMoveData[0].maxQnty);
       const header = rawMtrlMoveData[0].header;
@@ -98,7 +157,7 @@ export default class GoogleChart extends Component {
                 }
               },
               series: {
-                0: { curveType: 'function' },
+                1: { curveType: 'function' },
               },
             }}
             rootProps={{ 'data-testid': '2' }}
@@ -120,6 +179,8 @@ export default class GoogleChart extends Component {
                 </div>
               </div>
             </article>
+
+            { this.renderMtrlComments() }
 
             <article className='media'>
               <div className='media-content'>
@@ -173,7 +234,7 @@ export default class GoogleChart extends Component {
     return (
       <div className='google-chart card'>
         <div className='card-image'>
-          { this.renderGooglChart() }
+          { this.renderGoogleChart() }
         </div>
       </div>
     );

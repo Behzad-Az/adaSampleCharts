@@ -2,24 +2,39 @@ const getChartData = (req, res, knex) => {
 
   const { mtrlNum } = req.query;
 
-  knex('mtrlMovements')
-  .innerJoin('mtrlMetaInfo', 'mtrlMovements.mtrlMetaInfoId', 'mtrlMetaInfo.id')
-  .sum('qntyMoved as qntyMoved')
-  .select(
-    'postingDate', 'mtrlNum', 'reorderQnty', 'maxQnty',
-    'chartLowerBound', 'currentQnty', 'header', 'movingPrice',
-    'plannedDelivTime'
-  )
-  .where('mtrlNum', mtrlNum)
-  .groupBy(
-    'postingDate', 'mtrlNum', 'reorderQnty', 'maxQnty',
-    'chartLowerBound', 'currentQnty', 'header', 'movingPrice',
-    'plannedDelivTime'
-  )
-  .orderBy('postingDate', 'mtrlNum')
-  .then(rawMtrlMoveData => res.send({ rawMtrlMoveData, mtrlNum }))
+  let rawMtrlMoveData;
+
+  const getMtrlMovements = () => knex('mtrlMovements')
+    .innerJoin('mtrlMetaInfo', 'mtrlMovements.mtrlMetaInfoId', 'mtrlMetaInfo.id')
+    .sum('qntyMoved as qntyMoved')
+    .select(
+      'mtrlMovements.postingDate', 'mtrlNum', 'reorderQnty', 'maxQnty',
+      'chartLowerBound', 'currentQnty', 'header', 'movingPrice',
+      'plannedDelivTime'
+    )
+    .where('mtrlNum', mtrlNum)
+    .groupBy(
+      'mtrlMovements.postingDate', 'mtrlNum', 'reorderQnty', 'maxQnty',
+      'chartLowerBound', 'currentQnty', 'header', 'movingPrice',
+      'plannedDelivTime'
+    )
+    .orderBy('mtrlMovements.postingDate', 'mtrlNum');
+
+  const getMtrlComments = () => knex('mtrlComments')
+    .innerJoin('mtrlMetaInfo', 'mtrlComments.mtrlMetaInfoId', 'mtrlMetaInfo.id')
+    .select('postingDate', 'createdBy', 'content', 'mtrlComments.id')
+    .where('mtrlNum', mtrlNum)
+    .orderBy('postingDate');
+
+
+  getMtrlMovements()
+  .then(results => {
+    rawMtrlMoveData = results;
+    return getMtrlComments()
+  })
+  .then(rawMtrlComments => res.send({ rawMtrlMoveData, rawMtrlComments, mtrlNum }))
   .catch(err => {
-    console.log('Error in getChartData.js: ', err);
+    console.error('Error in getChartData.js: ', err);
     res.status(400);
   });
 

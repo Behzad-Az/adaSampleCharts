@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import GoogleChart from 'components/global/GoogleChart';
 import MtrlList from 'components/global/MtrlList';
 import LessonLearnedBox from 'components/global/LessonLearnedBox';
-import { defaultChartData } from 'constants/defaultChartData';
 
 @connect(state => ({
   // error: state.chart.get('error'),
@@ -34,12 +32,6 @@ export default class Landing extends Component {
   }
 
   render() {
-    // const {
-    //   loading,
-    //   error,
-    //   charts,
-    // } = this.props;
-
     return (
       <div className='landing-page container'>
         <br />
