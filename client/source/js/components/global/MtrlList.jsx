@@ -45,7 +45,10 @@ export default class Landing extends Component {
     const randomGenerator = Math.floor(Math.random() * 4);
     let icon;
 
-    switch(randomGenerator) {
+    if (Number(mtrlNum) === 11037462) {
+      icon = 'fas fa-search-dollar';
+    } else {
+      switch(randomGenerator) {
       case 0:
         icon = 'fas fa-search-dollar';
         break;
@@ -58,11 +61,12 @@ export default class Landing extends Component {
       default:
         icon = 'fas fa-exclamation-circle';
         break;
+      }
     }
 
     return (
       <a className={active} key={mtrlNum} onClick={() => this.selectMtrl(mtrlNum)}>
-        <p className='has-text-weight-bold is-size-6'><span className='icon is-left'><i className={icon} /></span> {` MM ${mtrl.mtrlNum}`} </p>
+        <p className='has-text-weight-bold'><span className='icon is-left'><i className={icon} /></span> {` MM ${mtrl.mtrlNum}`} </p>
         <p className='is-size-8'>{header}</p>
       </a>
     );

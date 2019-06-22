@@ -55,11 +55,9 @@ export default class Landing extends Component {
             <MtrlList />
             <LessonLearnedBox />
           </div>
-
           <div className='column'>
             <GoogleChart />
           </div>
-
         </div>
       </div>
     );

@@ -55,8 +55,8 @@ export default class Landing extends Component {
           </div>
         </div>
         <footer className='card-footer'>
-          <a href='#' className='card-footer-item'>Download</a>
-          <a href='#' className='card-footer-item'>Acknowledge</a>
+          <a href='#' className='card-footer-item'><span className='icon'><i className='fas fa-align-left fa-download' /></span><span>Download</span></a>
+          <a href='#' className='card-footer-item'><span className='icon'><i className='fas fa-align-left fa-check' /></span><span>Acknowledge</span></a>
         </footer>
       </div>
 

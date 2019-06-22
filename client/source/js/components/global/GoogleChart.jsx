@@ -48,12 +48,12 @@ export default class GoogleChart extends Component {
           <article className='media' key={id}>
             <div className='media-content'>
               <div className='content'>
-                <p>
+                <p className='is-size-7'>
                   <strong>{createdBy}</strong><small> on {postingDate.slice(0,10)}</small>
                   <br />
                   {content}
                 </p>
-                { acknowledgeable && !acknowledged && <p className='has-text-right has-size-7'><small><a>Acknowledge</a></small></p> }
+                { acknowledgeable && !acknowledged && <p className='has-text-right'><a className='is-size-7'><span className='icon'><i className='fas fa-align-left fa-check' /></span><span>Acknowledge</span></a></p> }
               </div>
             </div>
           </article>
@@ -64,7 +64,7 @@ export default class GoogleChart extends Component {
         <article className='media'>
           <div className='media-content'>
             <div className='content'>
-              <p>Loading comments...</p>
+              <p className='is-size-7'>Loading comments...</p>
             </div>
           </div>
         </article>
@@ -74,7 +74,7 @@ export default class GoogleChart extends Component {
         <article className='media'>
           <div className='media-content'>
             <div className='content'>
-              <p>Encountered error while loading comments.</p>
+              <p className='is-size-7'>Encountered error while loading comments.</p>
             </div>
           </div>
         </article>
@@ -84,7 +84,7 @@ export default class GoogleChart extends Component {
         <article className='media'>
           <div className='media-content'>
             <div className='content'>
-              <p>No comment could be found.</p>
+              <p className='is-size-7'>No comment could be found.</p>
             </div>
           </div>
         </article>
@@ -130,53 +130,86 @@ export default class GoogleChart extends Component {
 
       return (
         <div>
-          <Chart
-            width={'100%'}
-            height={'320px'}
-            chartType='LineChart'
-            loader={<div>Loading chart data...</div>}
-            data={chartDataArr}
-            options={{
-              legend: {
-                position: 'top',
-                alignment: 'center'
-              },
-              hAxis: {
-                format: 'MMM-yy',
-                viewWindow: {
-                  min: chartLowerBound,
-                  max: new Date(2019, 5, 2)
-                }
-              },
-              vAxis: {
-                title: 'Quantity',
-                viewWindow: {
-                  min: 0
-                }
-              },
-              series: {
-                1: { curveType: 'function' },
-              },
-            }}
-            rootProps={{ 'data-testid': '2' }}
-          />
           <div className='card-content'>
             <article className='media'>
               <div className='media-content'>
                 <div className='content'>
-                  <p>
-                    <strong>{`MM ${mtrlNum}, ${header}`}</strong>
+                  <p className='is-size-6'>
+                    <strong>{`MM ${mtrlNum}, ${header}`} | Est. $300,000 in Savings</strong>
                     <br />
+                    <small>
                     {
-                      `Current Qnty ${currentQnty}, Unit Price $${movingPrice},
-                      Total Current Value $${movingPrice * currentQnty}, Planned Deliv Time ${plannedDelivTime} Days`
+                      `Qnty ${currentQnty} | Unit Price $${movingPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')},
+                      Total Inventory Value $${(movingPrice * currentQnty).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')} | Planned Delivery Time ${plannedDelivTime} Days`
                     }
+                    </small>
                   </p>
                 </div>
               </div>
             </article>
+            <Chart
+              width={'100%'}
+              height={'320px'}
+              chartType='LineChart'
+              loader={<div>Loading chart data...</div>}
+              data={chartDataArr}
+              options={{
+                legend: {
+                  position: 'top',
+                  alignment: 'center'
+                },
+                hAxis: {
+                  format: 'MMM-yy',
+                  viewWindow: {
+                    min: chartLowerBound,
+                    max: new Date(2019, 5, 2)
+                  }
+                },
+                vAxis: {
+                  title: 'Quantity',
+                  viewWindow: {
+                    min: 0
+                  }
+                },
+                series: {
+                  1: { curveType: 'function' },
+                },
+              }}
+              rootProps={{ 'data-testid': '2' }}
+            />
             { this.renderMtrlComments() }
           </div>
+
+          <div className='field is-grouped' style={{'justify-content': 'center'}}>
+            <p className='control'>
+              <a className='button is-small is-dark'>
+                <span className='icon'><i className='fas fa-align-left fa-check-double' /></span><span>Acknowledge All</span>
+              </a>
+            </p>
+            <p className='control'>
+              <a className='button is-small is-dark'>
+                <span className='icon'><i className='fas fa-align-left fa-history' /></span><span>See All History</span>
+              </a>
+            </p>
+            <p className='control'>
+              <a className='button is-small is-dark' disabled>
+                <span className='icon'><i className='fas fa-align-left fa-camera' /></span><span>See Photos</span>
+              </a>
+            </p>
+            list-alt
+            <p className='control'>
+              <a className='button is-small is-dark'>
+                <span className='icon'><i className='far fa-align-left fa-list-alt' /></span><span>See Long Description</span>
+              </a>
+            </p>
+            <p className='control'>
+              <a className='button is-small is-dark'>
+                <span className='icon'><i className='fas fa-align-left fa-comment' /></span><span>Make Comment</span>
+              </a>
+            </p>
+          </div>
+          <br />
+
         </div>
       );
     } else if (loading) {

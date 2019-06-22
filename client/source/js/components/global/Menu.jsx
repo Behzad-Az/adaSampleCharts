@@ -105,7 +105,6 @@ export default class Menu extends Component {
         <div id='navbarBasicExample' className='navbar-menu'>
           <div className='navbar-start'>
 
-
             <NavLink
               activeClassName='Menu-link--active navbar-item is-active'
               className='Menu-link navbar-item'
@@ -113,16 +112,6 @@ export default class Menu extends Component {
             >
               Latest Updates
             </NavLink>
-
-
-            <NavLink
-              activeClassName='Menu-link--active navbar-item is-active'
-              className='Menu-link navbar-item'
-              to='/404'
-            >
-              Previous Reports
-            </NavLink>
-
 
           </div>
 
