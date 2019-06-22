@@ -33,7 +33,7 @@ export default class Landing extends Component {
 
   render() {
     return (
-      <div className='landing-page container'>
+      <div className='landing-page'>
         <br />
         <div className='columns'>
           <div className='column is-one-third'>
