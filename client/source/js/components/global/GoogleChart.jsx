@@ -135,12 +135,12 @@ export default class GoogleChart extends Component {
               <div className='media-content'>
                 <div className='content'>
                   <p className='is-size-6'>
-                    <strong>{`Part No. ${mtrlNum} | ${header}`} | Est. $300,000 in Savings</strong>
+                    <strong>{`Part No. ${mtrlNum} | ${header}`} | Est. $385,000 in Savings</strong>
                     <br />
                     <small>
                     {
-                      `Qnty ${currentQnty} | Unit Price $${movingPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')},
-                      Total Inventory Value $${(movingPrice * currentQnty).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')} | Planned Delivery Time ${plannedDelivTime} Days`
+                      `Qnty ${currentQnty} | Unit Price $${Math.round(movingPrice).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')},
+                      Total Inventory Value $${(Math.round(movingPrice) * currentQnty).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')} | Planned Deliv. Time ${plannedDelivTime} Days`
                     }
                     </small>
                   </p>
@@ -193,7 +193,7 @@ export default class GoogleChart extends Component {
             </p>
             <p className='control'>
               <a className='button is-small is-dark'>
-                <span className='icon'><i className='fas fa-align-left fa-camera' /></span><span>See Photos</span>
+                <span className='icon'><i className='fas fa-align-left fa-file-alt' /></span><span>See Documentation</span>
               </a>
             </p>
             <p className='control'>
@@ -203,7 +203,7 @@ export default class GoogleChart extends Component {
             </p>
             <p className='control'>
               <a className='button is-small is-dark'>
-                <span className='icon'><i className='fas fa-align-left fa-comment' /></span><span>Make Comment</span>
+                <span className='icon'><i className='fas fa-align-left fa-comment' /></span><span>Add Comment</span>
               </a>
             </p>
           </div>
