@@ -43,7 +43,7 @@ export default class Landing extends Component {
           <div className='content columns is-vcentered'>
             <span className='icon' style={{ marginRight: '15px' }}><i className='fas fa-align-left fa-angle-left' /></span>
             <span className='has-text-justified is-size-7'>
-              7495HF operators have reported parts incompatibility in newer and older machines.
+              P&H4100 operators in your area have reported parts incompatibility in newer and older machines.
               <br /><small><time dateTime='2019-1-15'>15 Jan 2019</time></small>
             </span>
             <span className='icon'style={{ marginLeft: '15px' }}><i className='fas fa-align-right fa-angle-right' /></span>
